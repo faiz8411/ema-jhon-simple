@@ -3,6 +3,7 @@ import './Cart.css'
 
 const Cart = (props) => {
     const { cart } = props;
+    console.log(props.children)
     // console.log(cart)
     let totalQuantity = 0
     let total = 0
@@ -25,6 +26,8 @@ const Cart = (props) => {
             <p>shipping:{shipping}</p>
             <p>tax:{tax}</p>
             <p>grandTotal:{grandTotal}</p>
+            {props.children}
+
         </div>
     );
 };
