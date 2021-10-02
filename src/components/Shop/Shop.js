@@ -30,8 +30,8 @@ const Shop = () => {
                 const addedProduct = products.find(product => product.key === key)
                 if (addedProduct) {
 
-                    const quantyity = savedCart[key]
-                    addedProduct.quantyity = quantyity
+                    const quantity = savedCart[key]
+                    addedProduct.quantity = quantity
                     // console.log(addedProduct)
                     storedCart.push(addedProduct)
                 }
@@ -42,7 +42,18 @@ const Shop = () => {
         }
     }, [products])
     const handeAddToCart = (product) => {
-        const newCart = [...cart, product]
+        const exist = cart.find(pd => pd.key === product.key)
+        let newCart = []
+        if (exist) {
+            const rest = cart.filter(pd => pd.key !== product.key);
+            exist.quantity = exist.quantity + 1;
+            newCart = [...rest, product]
+        }
+        else {
+            product.quantity = 1
+            newCart = [...cart, product]
+        }
+
         setCart(newCart)
         // save to localstorage
         addToDb(product.key)
